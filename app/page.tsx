@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import QuickStats from '@/components/QuickStats';
@@ -19,10 +19,22 @@ import BackToTop from '@/components/BackToTop';
 import DiagnosticWizard from '@/components/DiagnosticWizard';
 import DelayCalculator from '@/components/DelayCalculator';
 import TrueProofSlider from '@/components/TrueProofSlider';
+import ArchitectureOfFlow from '@/components/ArchitectureOfFlow';
+import HeaderTopBar from '@/components/HeaderTopBar';
+import LeadMagnetModal from '@/components/LeadMagnetModal';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false);
+  const [isLeadMagnetOpen, setIsLeadMagnetOpen] = useState(false);
+
+  // Trigger lead magnet after 10 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLeadMagnetOpen(true);
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleCtaClick = () => {
     setIsModalOpen(true);
@@ -34,14 +46,16 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <HeaderTopBar />
       <Header onCtaClick={handleCtaClick} />
 
       <main className="flex-grow">
         <HeroSection onCtaClick={handleCtaClick} />
-        <DiagnosticWizard />
+        <DiagnosticWizard onCtaClick={handleCtaClick} />
         <QuickStats />
         <ServicesSection onCtaClick={handleCtaClick} />
-        <DelayCalculator />
+        <DelayCalculator onCtaClick={handleCtaClick} />
+        <ArchitectureOfFlow />
         <TrustBadges />
         <PromoCard onCtaClick={handleCtaClick} />
         <ServiceAreasSection />
@@ -56,6 +70,7 @@ export default function Home() {
       <BackToTop />
 
       <CTAModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <LeadMagnetModal isOpen={isLeadMagnetOpen} onClose={() => setIsLeadMagnetOpen(false)} />
       <LearnMoreModal isOpen={isLearnMoreOpen} onClose={() => setIsLearnMoreOpen(false)} />
     </div>
   );

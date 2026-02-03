@@ -8,10 +8,43 @@ import {
     AlertTriangle,
     TrendingUp,
     Home,
+    Waves,
     ShieldX
 } from 'lucide-react';
 
-export default function DelayCalculator() {
+function AnimatedNumber({ value, prefix = '', suffix = '', decimals = 0 }: { value: number; prefix?: string; suffix?: string; decimals?: number }) {
+    const [displayValue, setDisplayValue] = useState(value);
+
+    useEffect(() => {
+        let start = displayValue;
+        const end = value;
+        const duration = 500;
+        const startTime = performance.now();
+
+        const animate = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const current = start + (end - start) * progress;
+            setDisplayValue(current);
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+
+        requestAnimationFrame(animate);
+    }, [value]);
+
+    return (
+        <span>{prefix}{displayValue.toFixed(decimals)}{suffix}</span>
+    );
+}
+
+interface DelayCalculatorProps {
+    onCtaClick?: () => void;
+}
+
+export default function DelayCalculator({ onCtaClick }: DelayCalculatorProps) {
     const [dripsPerMinute, setDripsPerMinute] = useState(20);
     const [daysDelayed, setDaysDelayed] = useState(7);
 
@@ -20,43 +53,44 @@ export default function DelayCalculator() {
     const totalGallonsLost = gallonsLostPerDay * daysDelayed;
     const financialLoss = totalGallonsLost * 0.015; // $0.015 per gallon average
     const moldRisk = Math.min(100, (daysDelayed * 5) + (dripsPerMinute / 10));
-    const damageRisk = Math.min(100, (daysDelayed * 8));
 
     return (
-        <section className="py-20 bg-slate-900 relative overflow-hidden">
+        <section className="py-20 md:py-32 bg-slate-950 relative overflow-hidden">
             {/* Background Decorative Elements */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-orange-600/10 rounded-full blur-[100px] -mr-48 -mt-48" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] -ml-48 -mb-48" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-600/10 rounded-full blur-[120px] -mr-64 -mt-64" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -ml-64 -mb-64" />
 
             <div className="max-w-6xl mx-auto px-4 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div className="grid lg:grid-cols-2 gap-20 items-center">
 
                     {/* Left Side: Inputs */}
-                    <div className="space-y-8 animate-reveal">
+                    <div className="space-y-10 animate-reveal">
                         <div>
-                            <span className="text-orange-500 font-bold tracking-widest uppercase text-sm mb-2 block">
-                                Logistical Impact
+                            <span className="text-orange-500 font-black tracking-[0.2em] uppercase text-xs mb-4 block">
+                                Educational Tool
                             </span>
-                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                                The Invisible Cost <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
-                                    of Delay
+                            <h2 className="text-5xl md:text-7xl font-black text-white mb-8 leading-[0.9]">
+                                Understanding <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600">
+                                    Your Leak
                                 </span>
                             </h2>
-                            <p className="text-lg text-slate-400 leading-relaxed">
-                                Plumbing issues don't stay the same. They grow. Use this tool to see the actual impact of waiting another day.
+                            <p className="text-xl text-slate-400 leading-relaxed font-medium">
+                                We believe in transparency. Use this tool to understand what's happening with your plumbing—no pressure, just facts.
                             </p>
                         </div>
 
-                        <div className="space-y-10 group bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-3xl">
+                        <div className="space-y-12 bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[2.5rem] shadow-2xl">
                             {/* Slider 1 */}
-                            <div className="space-y-4">
+                            <div className="space-y-6">
                                 <div className="flex justify-between items-center text-white">
-                                    <label className="font-bold flex items-center gap-2">
-                                        <Droplets className="w-5 h-5 text-blue-400" />
-                                        How fast is the leak?
+                                    <label className="font-bold text-lg flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                                            <Droplets className="w-5 h-5 text-blue-400" />
+                                        </div>
+                                        Leak Intensity
                                     </label>
-                                    <span className="text-2xl font-black text-orange-500 italic">{dripsPerMinute} drips/min</span>
+                                    <span className="text-3xl font-black text-orange-500 tabular-nums">{dripsPerMinute} <span className="text-sm uppercase tracking-widest text-slate-500">dpm</span></span>
                                 </div>
                                 <input
                                     type="range"
@@ -64,22 +98,20 @@ export default function DelayCalculator() {
                                     max="120"
                                     value={dripsPerMinute}
                                     onChange={(e) => setDripsPerMinute(parseInt(e.target.value))}
-                                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-orange-500"
                                 />
-                                <div className="flex justify-between text-xs text-slate-500 font-bold uppercase tracking-wider">
-                                    <span>Slow Drip</span>
-                                    <span>Fast Stream</span>
-                                </div>
                             </div>
 
                             {/* Slider 2 */}
-                            <div className="space-y-4">
+                            <div className="space-y-6">
                                 <div className="flex justify-between items-center text-white">
-                                    <label className="font-bold flex items-center gap-2">
-                                        <TrendingUp className="w-5 h-5 text-orange-400" />
-                                        How long has it been leaking?
+                                    <label className="font-bold text-lg flex items-center gap-3">
+                                        <div className="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
+                                            <TrendingUp className="w-5 h-5 text-orange-400" />
+                                        </div>
+                                        Duration of Delay
                                     </label>
-                                    <span className="text-2xl font-black text-orange-500 italic">{daysDelayed} days</span>
+                                    <span className="text-3xl font-black text-orange-500 tabular-nums">{daysDelayed} <span className="text-sm uppercase tracking-widest text-slate-500">days</span></span>
                                 </div>
                                 <input
                                     type="range"
@@ -87,70 +119,72 @@ export default function DelayCalculator() {
                                     max="30"
                                     value={daysDelayed}
                                     onChange={(e) => setDaysDelayed(parseInt(e.target.value))}
-                                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-orange-500"
                                 />
-                                <div className="flex justify-between text-xs text-slate-500 font-bold uppercase tracking-wider">
-                                    <span>Detected Today</span>
-                                    <span>1 Month</span>
-                                </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Right Side: Results */}
-                    <div className="grid grid-cols-2 gap-4 animate-reveal delay-200">
+                    <div className="grid grid-cols-2 gap-6 animate-reveal delay-200">
                         {/* Financial Loss */}
-                        <div className="bg-white rounded-3xl p-6 shadow-2xl hover:scale-105 transition-transform duration-300">
-                            <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-600 mb-4">
-                                <DollarSign className="w-6 h-6" />
+                        <div className="bg-white rounded-[2rem] p-8 shadow-2xl hover:scale-105 transition-all duration-500 group">
+                            <div className="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center text-green-600 mb-6 group-hover:rotate-12 transition-transform">
+                                <DollarSign className="w-7 h-7" />
                             </div>
-                            <p className="text-slate-500 font-bold text-xs uppercase mb-1">Estimated Loss</p>
-                            <h4 className="text-3xl font-black text-slate-900">${financialLoss.toFixed(2)}</h4>
-                            <p className="text-slate-400 text-xs mt-2 italic">Pure water wastage cost</p>
+                            <p className="text-slate-500 font-black text-xs uppercase tracking-widest mb-2">Wasted Utility</p>
+                            <h4 className="text-4xl font-black text-slate-900 tabular-nums">
+                                <AnimatedNumber value={financialLoss} prefix="$" decimals={2} />
+                            </h4>
                         </div>
 
                         {/* Gallons Lost */}
-                        <div className="bg-white rounded-3xl p-6 shadow-2xl hover:scale-105 transition-transform duration-300">
-                            <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-4">
-                                <Droplets className="w-6 h-6" />
+                        <div className="bg-white rounded-[2rem] p-8 shadow-2xl hover:scale-105 transition-all duration-500 group">
+                            <div className="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 mb-6 group-hover:rotate-12 transition-transform">
+                                <Waves className="w-7 h-7" />
                             </div>
-                            <p className="text-slate-500 font-bold text-xs uppercase mb-1">Water Wasted</p>
-                            <h4 className="text-3xl font-black text-slate-900">{totalGallonsLost.toFixed(0)} gal</h4>
-                            <p className="text-slate-400 text-xs mt-2 italic">Enough to fill {Math.max(1, Math.round(totalGallonsLost / 40))} bathtubs</p>
+                            <p className="text-slate-500 font-black text-xs uppercase tracking-widest mb-2">Resource Loss</p>
+                            <h4 className="text-4xl font-black text-slate-900 tabular-nums">
+                                <AnimatedNumber value={totalGallonsLost} suffix=" Gal" />
+                            </h4>
                         </div>
 
-                        {/* Mold Risk */}
-                        <div className="bg-white rounded-3xl p-6 shadow-2xl hover:scale-105 transition-transform duration-300 col-span-2 relative overflow-hidden">
-                            <div className="flex justify-between items-start mb-6">
+                        {/* Risk Gauge */}
+                        <div className="bg-white rounded-[2rem] p-10 shadow-2xl hover:scale-[1.02] transition-all duration-500 col-span-2 relative overflow-hidden group">
+                            <div className="flex justify-between items-start mb-8">
                                 <div>
-                                    <div className="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-red-600 mb-4">
-                                        <AlertTriangle className="w-6 h-6" />
+                                    <div className="w-12 h-12 rounded-2xl bg-red-100 flex items-center justify-center text-red-600 mb-6 group-hover:scale-110 transition-transform">
+                                        <AlertTriangle className="w-7 h-7" />
                                     </div>
-                                    <p className="text-slate-500 font-bold text-xs uppercase mb-1">Secondary Damage Risk</p>
-                                    <h4 className="text-2xl font-black text-slate-900">High Risk of Structural Damage</h4>
+                                    <p className="text-slate-500 font-black text-xs uppercase tracking-widest mb-2">What to Watch For</p>
+                                    <h4 className="text-3xl font-black text-slate-900">Potential Issues</h4>
                                 </div>
                                 <div className="text-right">
-                                    <span className="text-4xl font-black text-red-600">{moldRisk.toFixed(0)}%</span>
+                                    <span className="text-6xl font-black text-red-600 tabular-nums">
+                                        <AnimatedNumber value={moldRisk} suffix="%" />
+                                    </span>
                                 </div>
                             </div>
 
-                            <div className="space-y-3">
-                                <div className="h-4 bg-slate-100 rounded-full overflow-hidden">
+                            <div className="space-y-6">
+                                <div className="h-6 bg-slate-100 rounded-full overflow-hidden p-1 shadow-inner">
                                     <div
-                                        className="h-full bg-gradient-to-r from-orange-400 to-red-600 transition-all duration-1000"
+                                        className="h-full bg-gradient-to-r from-orange-500 via-red-500 to-red-700 rounded-full transition-all duration-1000 flex items-center justify-end px-2"
                                         style={{ width: `${moldRisk}%` }}
-                                    />
+                                    >
+                                        <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-glow" />
+                                    </div>
                                 </div>
 
-                                <div className="grid grid-cols-3 gap-2">
+                                <div className="grid grid-cols-3 gap-4">
                                     {[
-                                        { icon: Home, label: 'Mold Growth' },
-                                        { icon: ShieldX, label: 'Drywall Rot' },
-                                        { icon: AlertTriangle, label: 'Electrical Short' },
+                                        { icon: Home, label: 'Mold Risk', color: 'text-orange-600' },
+                                        { icon: ShieldX, label: 'Drywall Decay', color: 'text-red-600' },
+                                        { icon: AlertTriangle, label: 'Flooding', color: 'text-red-800' },
                                     ].map((risk, i) => (
-                                        <div key={i} className="flex items-center gap-1.5 p-2 bg-slate-50 rounded-lg">
-                                            <risk.icon className="w-4 h-4 text-orange-500" />
-                                            <span className="text-[10px] font-bold text-slate-600 uppercase">{risk.label}</span>
+                                        <div key={i} className="flex flex-col items-center gap-2 p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:bg-white hover:shadow-md transition-all">
+                                            <risk.icon className={`w-6 h-6 ${risk.color}`} />
+                                            <span className="text-[10px] font-black text-slate-600 uppercase tracking-tight">{risk.label}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -158,9 +192,10 @@ export default function DelayCalculator() {
                         </div>
 
                         <Button
-                            className="col-span-2 bg-orange-600 hover:bg-orange-700 text-white font-bold h-16 rounded-2xl text-xl shadow-xl hover:scale-105 transition-all mt-4"
+                            onClick={onCtaClick}
+                            className="col-span-2 bg-orange-600 hover:bg-orange-700 text-white font-black h-20 rounded-[2rem] text-2xl shadow-2xl hover:shadow-orange-500/40 hover:scale-105 transition-all mt-6"
                         >
-                            Prevent Further Damage Now
+                            Get Expert Help
                         </Button>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
@@ -8,9 +9,44 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ onCtaClick }: HeroSectionProps) {
+  const [text, setText] = useState('');
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const words = ['Leak', 'Drip', 'Waste', 'Flood'];
+  const [speed, setSpeed] = useState(150);
+
+  useEffect(() => {
+    const handleType = () => {
+      const currentWord = words[wordIndex];
+      const shouldDelete = isDeleting;
+
+      if (!shouldDelete) {
+        setText(currentWord.substring(0, text.length + 1));
+        if (text.length + 1 === currentWord.length) {
+          setTimeout(() => setIsDeleting(true), 2000);
+          setSpeed(100);
+        } else {
+          setSpeed(150);
+        }
+      } else {
+        setText(currentWord.substring(0, text.length - 1));
+        if (text.length === 0) {
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % words.length);
+          setSpeed(150);
+        } else {
+          setSpeed(100);
+        }
+      }
+    };
+
+    const timer = setTimeout(handleType, speed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, wordIndex, speed]);
+
   return (
     <section className="relative min-h-[600px] md:min-h-screen overflow-hidden flex items-center">
-      {/* Dynamic Animated Background Layers */}
+      {/* ... Dynamic Animated Background Layers ... */}
       <div className="absolute inset-0 z-0">
         {/* Deep Slate Base */}
         <div className="absolute inset-0 bg-[#020617]" />
@@ -38,8 +74,11 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
         {/* Left Content */}
         <div className="space-y-6 md:space-y-8 flex flex-col justify-center">
           <div className="space-y-4 animate-reveal">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-none tracking-tight text-balance">
-              STOP THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 animate-pulse">LEAK</span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-none tracking-tight">
+              Stop the <span className="inline-block relative text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 min-w-[3ch]">
+                {text}
+                <span className="absolute right-[-4px] top-0 bottom-0 w-[4px] bg-orange-500 animate-pulse" />
+              </span>
             </h1>
             <div className="h-1.5 w-24 bg-orange-500 rounded-full" />
             <h2 className="text-xl md:text-2xl text-slate-300 font-medium tracking-wide">

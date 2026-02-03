@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import LiveStatus from './LiveStatus';
 
 interface HeaderProps {
   onCtaClick: () => void;
@@ -90,8 +89,6 @@ export default function Header({ onCtaClick }: HeaderProps) {
           </div>
         </div>
 
-        {/* Live Status Indicator - Hidden on Mobile */}
-        <LiveStatus />
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">

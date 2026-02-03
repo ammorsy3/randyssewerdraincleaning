@@ -31,7 +31,11 @@ interface Option {
     urgency?: 'low' | 'medium' | 'high';
 }
 
-export default function DiagnosticWizard() {
+interface DiagnosticWizardProps {
+    onCtaClick?: () => void;
+}
+
+export default function DiagnosticWizard({ onCtaClick }: DiagnosticWizardProps) {
     const [currentStepId, setCurrentStepId] = useState('problem-type');
     const [history, setHistory] = useState<string[]>([]);
     const [selections, setSelections] = useState<Record<string, string>>({});
@@ -57,9 +61,9 @@ export default function DiagnosticWizard() {
             title: 'Leak Location',
             question: 'Where is the leak located?',
             options: [
-                { label: 'Visible Pipe', value: 'visible', icon: Droplets, assessment: 'Visible leaks can quickly cause structural damage. Shut off your main water valve immediately.', urgency: 'high' },
-                { label: 'Inside Wall/Ceiling', value: 'hidden', icon: AlertTriangle, assessment: 'Hidden leaks are dangerous as they weaken the building structure and encourage mold.', urgency: 'high' },
-                { label: 'Under Sink/Toilet', value: 'fixture', icon: Wrench, assessment: 'Usually a failed seal or valve. Easy to fix but needs professional attention to prevent flooding.', urgency: 'medium' },
+                { label: 'Visible Pipe', value: 'visible', icon: Droplets, nextStep: 'urgency' },
+                { label: 'Inside Wall/Ceiling', value: 'hidden', icon: AlertTriangle, nextStep: 'urgency' },
+                { label: 'Under Sink/Toilet', value: 'fixture', icon: Wrench, nextStep: 'urgency' },
             ]
         },
         'water-heater': {
@@ -67,9 +71,9 @@ export default function DiagnosticWizard() {
             title: 'Water Heater',
             question: 'Any specific signs on the heater?',
             options: [
-                { label: 'Leaking Tank', value: 'tank-leak', icon: Droplets, assessment: 'A leaking tank often means a replacement is needed. Risk of minor explosion if pressure builds.', urgency: 'high' },
-                { label: 'Cold Water Only', value: 'no-heat', icon: Flame, assessment: 'Likely a pilot light or heating element failure. Safe but highly inconvenient.', urgency: 'medium' },
-                { label: 'Strange Noises', value: 'noise', icon: AlertTriangle, assessment: 'Sediment buildup can cause overheating and internal damage. Should be flushed soon.', urgency: 'low' },
+                { label: 'Leaking Tank', value: 'tank-leak', icon: Droplets, nextStep: 'urgency' },
+                { label: 'Cold Water Only', value: 'no-heat', icon: Flame, nextStep: 'urgency' },
+                { label: 'Strange Noises', value: 'noise', icon: AlertTriangle, nextStep: 'urgency' },
             ]
         },
         'blockage-type': {
@@ -77,9 +81,9 @@ export default function DiagnosticWizard() {
             title: 'Blockage Type',
             question: 'What is blocked?',
             options: [
-                { label: 'Single Sink/Toilet', value: 'single', icon: Waves, assessment: 'Likely a local blockage. Can usually be cleared with professional snaking.', urgency: 'low' },
-                { label: 'Multiple Drains', value: 'multiple', icon: AlertTriangle, assessment: 'Signs of a main sewer line blockage. Serious health risk if backup occurs.', urgency: 'high' },
-                { label: 'Slow Draining', value: 'slow', icon: Clock, assessment: 'Early warning sign of pipe narrowing. Best to clear now before it fully blocks.', urgency: 'low' },
+                { label: 'Single Sink/Toilet', value: 'single', icon: Waves, nextStep: 'urgency' },
+                { label: 'Multiple Drains', value: 'multiple', icon: AlertTriangle, nextStep: 'urgency' },
+                { label: 'Slow Draining', value: 'slow', icon: Clock, nextStep: 'urgency' },
             ]
         },
         'urgency': {
@@ -87,19 +91,29 @@ export default function DiagnosticWizard() {
             title: 'Urgency',
             question: 'How urgent is this for you?',
             options: [
-                { label: 'Emergency (Now)', value: 'now', icon: AlertTriangle, assessment: 'Our nearest team will be notified immediately for rapid dispatch.', urgency: 'high' },
-                { label: 'Next 24 Hours', value: 'soon', icon: Clock, assessment: 'We can fit you into tomorrow morning\'s schedule.', urgency: 'medium' },
-                { label: 'Request Quote', value: 'later', icon: CheckCircle2, assessment: 'We\'ll provide a detailed quote within 4 business hours.', urgency: 'low' },
+                { label: 'Emergency (Now)', value: 'now', icon: AlertTriangle, assessment: 'Critical: Our nearest team will be notified immediately for rapid dispatch. Shut off your main valve if possible.', urgency: 'high' },
+                { label: 'Next 24 Hours', value: 'soon', icon: Clock, assessment: 'Urgent: We recommend professional attention within 24 hours to prevent escalation. We can fit you into tomorrow morning\'s schedule.', urgency: 'medium' },
+                { label: 'Request Quote', value: 'later', icon: CheckCircle2, assessment: 'Routine: We can provide a detailed quote and schedule a visit within 48 hours for a permanent solution.', urgency: 'low' },
             ]
         }
     };
 
     const handleOptionSelect = (option: Option) => {
-        setSelections(prev => ({ ...prev, [currentStepId]: option.value }));
+        const newSelections = { ...selections, [currentStepId]: option.value };
+        setSelections(newSelections);
 
         if (option.assessment) {
+            // Enhanced Assessment Logic based on previous steps
+            let customText = option.assessment;
+
+            if (newSelections['problem-type'] === 'leak' && option.urgency === 'high') {
+                customText = "Immediate Action Required: Visible/Hidden leaks under high pressure can cause thousands in structural damage within hours. Our emergency crew is being alerted to your area.";
+            } else if (newSelections['problem-type'] === 'blocked' && newSelections['blockage-type'] === 'multiple') {
+                customText = "Main Line Warning: Multiple blocked drains indicate a recursive sewage backup. This is a severe health hazard. Avoid using any water until a technician arrives.";
+            }
+
             setFinalAssessment({
-                text: option.assessment,
+                text: customText,
                 urgency: option.urgency || 'medium'
             });
         } else if (option.nextStep) {
@@ -130,11 +144,11 @@ export default function DiagnosticWizard() {
         <section id="diagnostic" className="py-20 bg-slate-50 overflow-hidden">
             <div className="max-w-4xl mx-auto px-4">
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">
-                        Interactive Diagnostic Tool
+                    <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+                        Interactive <span className="text-orange-600">Diagnostic</span>
                     </h2>
-                    <p className="text-lg text-slate-600">
-                        Not sure if it's an emergency? Let our expert logic guide you.
+                    <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">
+                        Not sure if it's an emergency? Use our expert logic to get a preliminary assessment in 30 seconds.
                     </p>
                 </div>
 
@@ -204,8 +218,8 @@ export default function DiagnosticWizard() {
                             ) : (
                                 <div className="animate-reveal text-center max-w-2xl mx-auto py-8">
                                     <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full mb-8 ${finalAssessment.urgency === 'high' ? 'bg-red-100 text-red-600' :
-                                            finalAssessment.urgency === 'medium' ? 'bg-orange-100 text-orange-600' :
-                                                'bg-green-100 text-green-600'
+                                        finalAssessment.urgency === 'medium' ? 'bg-orange-100 text-orange-600' :
+                                            'bg-green-100 text-green-600'
                                         }`}>
                                         <AlertTriangle className="w-10 h-10" />
                                     </div>
@@ -216,8 +230,8 @@ export default function DiagnosticWizard() {
 
                                     <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-8 text-left relative overflow-hidden">
                                         <div className={`absolute left-0 top-0 bottom-0 w-2 ${finalAssessment.urgency === 'high' ? 'bg-red-500' :
-                                                finalAssessment.urgency === 'medium' ? 'bg-orange-500' :
-                                                    'bg-green-500'
+                                            finalAssessment.urgency === 'medium' ? 'bg-orange-500' :
+                                                'bg-green-500'
                                             }`} />
                                         <p className="text-lg text-slate-700 leading-relaxed font-medium">
                                             "{finalAssessment.text}"
@@ -225,8 +239,8 @@ export default function DiagnosticWizard() {
                                         <div className="mt-4 flex items-center gap-2">
                                             <span className="text-slate-400 text-sm font-bold uppercase tracking-wider">Urgency Level:</span>
                                             <span className={`text-sm font-bold uppercase tracking-wider ${finalAssessment.urgency === 'high' ? 'text-red-600' :
-                                                    finalAssessment.urgency === 'medium' ? 'text-orange-600' :
-                                                        'text-green-600'
+                                                finalAssessment.urgency === 'medium' ? 'text-orange-600' :
+                                                    'text-green-600'
                                                 }`}>
                                                 {finalAssessment.urgency}
                                             </span>
@@ -235,6 +249,7 @@ export default function DiagnosticWizard() {
 
                                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                         <Button
+                                            onClick={onCtaClick}
                                             className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 text-lg rounded-xl font-bold shadow-xl hover:scale-105 transition-all"
                                         >
                                             Fix This Now
