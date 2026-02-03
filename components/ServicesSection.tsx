@@ -23,25 +23,25 @@ export default function ServicesSection({ onCtaClick }: ServicesSectionProps) {
       icon: <Droplet className="w-8 h-8" />,
       title: 'Emergency Leak Repair',
       description: 'Fast response to water leaks, burst pipes, and water damage with expert solutions.',
-      image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop',
+      image: '/service-leak.png',
     },
     {
       icon: <Wrench className="w-8 h-8" />,
       title: 'Pipe Installation & Maintenance',
       description: 'Complete pipe repair, replacement, and preventive maintenance services.',
-      image: 'https://images.unsplash.com/photo-1517420879433-b0f46e3fdef1?w=400&h=400&fit=crop',
+      image: '/service-pipe.png',
     },
     {
       icon: <Wind className="w-8 h-8" />,
       title: 'Drain Cleaning & Clearing',
       description: 'Professional drain cleaning using advanced techniques to clear blockages.',
-      image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop',
+      image: '/service-drain.png',
     },
     {
       icon: <Thermometer className="w-8 h-8" />,
       title: 'Water Heater Services',
       description: 'Installation, repair, and maintenance of water heaters and tankless systems.',
-      image: 'https://images.unsplash.com/photo-1517420879433-b0f46e3fdef1?w=400&h=400&fit=crop',
+      image: '/service-pipe.png',
     },
   ];
 

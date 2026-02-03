@@ -127,8 +127,8 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
           <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
           <div className="relative h-[400px] md:h-[600px] rounded-2xl overflow-hidden glass-card">
             <Image
-              src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&h=1000&fit=crop"
-              alt="Professional plumber fixing a leak"
+              src="/hero-plumber.png"
+              alt="Professional plumber in a modern kitchen"
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-1000"
               priority
