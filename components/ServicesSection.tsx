@@ -61,41 +61,64 @@ export default function ServicesSection({ onCtaClick }: ServicesSectionProps) {
           {services.map((service, index) => (
             <div
               key={index}
-              className="glass-effect rounded-2xl p-6 group cursor-pointer hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-full"
+              className={`relative rounded-2xl p-6 group cursor-pointer transition-all duration-500 overflow-hidden flex flex-col h-full animate-reveal delay-${(index + 1) * 100} bg-white border border-slate-100 hover:border-orange-200`}
+              style={{
+                transformStyle: 'preserve-3d',
+                perspective: '1000px',
+              }}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+              }}
             >
-              {/* Service Icon */}
-              <div className="mb-4 text-orange-600 group-hover:scale-110 transition-transform duration-300">
-                {service.icon}
+              {/* Gradient Border on Hover */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-400 via-orange-500 to-blue-400 rounded-2xl opacity-0 group-hover:opacity-50 blur-sm transition-all duration-500" />
+
+              {/* Card Content */}
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Service Icon */}
+                <div className="mb-4 text-orange-600 group-hover:scale-110 group-hover:animate-bounce transition-all duration-300">
+                  {service.icon}
+                </div>
+
+                {/* Service Title */}
+                <h3 className="text-xl font-bold text-slate-950 mb-3 group-hover:text-orange-600 transition-colors duration-300">
+                  {service.title}
+                </h3>
+
+                {/* Service Description */}
+                <p className="text-slate-600 text-sm mb-4 flex-grow">
+                  {service.description}
+                </p>
+
+                {/* Service Image */}
+                <div className="relative w-full h-32 rounded-lg overflow-hidden mb-4">
+                  <Image
+                    src={service.image || "/placeholder.svg"}
+                    alt={service.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+
+                {/* CTA Button */}
+                <Button
+                  onClick={onCtaClick}
+                  variant="outline"
+                  className="w-full border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white rounded-lg transition-all duration-300 font-semibold bg-transparent hover:scale-105"
+                >
+                  Learn More
+                </Button>
               </div>
-
-              {/* Service Title */}
-              <h3 className="text-xl font-bold text-slate-950 mb-3 group-hover:text-orange-600 transition-colors duration-300">
-                {service.title}
-              </h3>
-
-              {/* Service Description */}
-              <p className="text-text-secondary text-sm mb-4 flex-grow">
-                {service.description}
-              </p>
-
-              {/* Service Image */}
-              <div className="relative w-full h-32 rounded-lg overflow-hidden mb-4">
-                <Image
-                  src={service.image || "/placeholder.svg"}
-                  alt={service.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-
-              {/* CTA Button */}
-              <Button
-                onClick={onCtaClick}
-                variant="outline"
-                className="w-full border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white rounded-lg transition-all duration-300 font-semibold bg-transparent"
-              >
-                Learn More
-              </Button>
             </div>
           ))}
         </div>

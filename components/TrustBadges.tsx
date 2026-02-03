@@ -36,14 +36,32 @@ export default function TrustBadges() {
           {badges.map((badge, index) => (
             <div
               key={index}
-              className="glass-effect rounded-2xl p-8 text-center flex flex-col items-center gap-4 hover:shadow-xl transition-all duration-300 group"
+              className={`relative group animate-reveal delay-${(index + 1) * 100}`}
             >
-              <div className="text-orange-400 group-hover:scale-110 transition-transform duration-300 group-hover:text-orange-300">
-                {badge.icon}
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-2">{badge.title}</h3>
-                <p className="text-gray-300 text-sm">{badge.description}</p>
+              {/* Animated Gradient Border */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 via-orange-400 to-blue-500 rounded-2xl opacity-50 group-hover:opacity-100 blur-sm group-hover:blur transition-all duration-500 animate-pulse" />
+
+              {/* Card Content */}
+              <div className="relative rounded-2xl p-8 text-center flex flex-col items-center gap-4 bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 group-hover:border-orange-500/30 transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-orange-500/20">
+                {/* Icon with Pulse Glow */}
+                <div
+                  className="text-orange-400 transition-all duration-300 group-hover:scale-110"
+                  style={{
+                    filter: 'drop-shadow(0 0 8px rgba(251, 146, 60, 0.4))',
+                    animation: 'icon-pulse 3s ease-in-out infinite'
+                  }}
+                >
+                  {badge.icon}
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-orange-300 transition-colors duration-300">
+                    {badge.title}
+                  </h3>
+                  <p className="text-slate-300 text-sm group-hover:text-slate-200 transition-colors duration-300">
+                    {badge.description}
+                  </p>
+                </div>
               </div>
             </div>
           ))}

@@ -16,6 +16,9 @@ import StickyBottomBar from '@/components/StickyBottomBar';
 import CTAModal from '@/components/CTAModal';
 import LearnMoreModal from '@/components/LearnMoreModal';
 import BackToTop from '@/components/BackToTop';
+import DiagnosticWizard from '@/components/DiagnosticWizard';
+import DelayCalculator from '@/components/DelayCalculator';
+import TrueProofSlider from '@/components/TrueProofSlider';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,14 +35,17 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header onCtaClick={handleCtaClick} />
-      
+
       <main className="flex-grow">
         <HeroSection onCtaClick={handleCtaClick} />
+        <DiagnosticWizard />
         <QuickStats />
         <ServicesSection onCtaClick={handleCtaClick} />
+        <DelayCalculator />
         <TrustBadges />
         <PromoCard onCtaClick={handleCtaClick} />
         <ServiceAreasSection />
+        <TrueProofSlider />
         <TestimonialsSection onLearnMoreClick={handleLearnMoreClick} />
         <FAQSection onLearnMoreClick={handleLearnMoreClick} />
         <CTASection onCtaClick={handleCtaClick} />
@@ -48,7 +54,7 @@ export default function Home() {
       <Footer onCtaClick={handleCtaClick} />
       <StickyBottomBar onCtaClick={handleCtaClick} />
       <BackToTop />
-      
+
       <CTAModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <LearnMoreModal isOpen={isLearnMoreOpen} onClose={() => setIsLearnMoreOpen(false)} />
     </div>
