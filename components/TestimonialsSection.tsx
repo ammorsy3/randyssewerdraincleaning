@@ -18,28 +18,28 @@ interface TestimonialsSectionProps {
 export default function TestimonialsSection({ onLearnMoreClick }: TestimonialsSectionProps) {
   const testimonials: Testimonial[] = [
     {
-      name: 'Sarah Johnson',
-      role: 'Homeowner',
-      location: 'Downtown',
+      name: 'Madison H.',
+      role: 'Hired on Thumbtack',
+      location: 'Toilet Replacement',
       rating: 5,
       quote:
-        'Jack arrived within an hour and fixed our burst pipe before it caused more damage. Professional, fast, and affordable. Highly recommended!',
+        'Randy was quick to respond and fast with completion of the service. The installation was done expeditiously and thoroughly. I will definitely contact again for my next toilet replacement.',
     },
     {
-      name: 'Michael Chen',
-      role: 'Property Manager',
-      location: 'Riverside',
+      name: 'AnneMarie L.',
+      role: 'Hired on Thumbtack',
+      location: 'Plumbing Service',
       rating: 5,
       quote:
-        'We use Jack The Fix for all our emergency plumbing needs. The response time is incredible, and they always do quality work. Five stars!',
+        'We really enjoyed working with Randy! He was punctual and very professional. We will be using him for our future plumbing needs.',
     },
     {
-      name: 'Elena Rodriguez',
-      role: 'Small Business Owner',
-      location: 'Westend',
+      name: 'Bryan C.',
+      role: 'Hired on Thumbtack',
+      location: 'Plumbing Service',
       rating: 5,
       quote:
-        'Outstanding service! Jack was courteous, knowledgeable, and fixed our water heater issue in no time. Will definitely call again.',
+        "Randy's team scheduled me quickly and performed the job better than expected. I appreciate their patience. I will use them again for future projects.",
     },
   ];
 
@@ -47,7 +47,7 @@ export default function TestimonialsSection({ onLearnMoreClick }: TestimonialsSe
     <section id="testimonials" className="py-16 md:py-24 bg-white relative overflow-hidden">
       {/* Decorative Quote Marks */}
       <div className="absolute top-20 left-10 opacity-5 pointer-events-none">
-        <Quote className="w-32 h-32 text-orange-500" />
+        <Quote className="w-32 h-32 text-amber-500" />
       </div>
       <div className="absolute bottom-20 right-10 opacity-5 pointer-events-none rotate-180">
         <Quote className="w-32 h-32 text-blue-500" />
@@ -59,11 +59,11 @@ export default function TestimonialsSection({ onLearnMoreClick }: TestimonialsSe
             What Our Customers Say
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto text-balance">
-            Over 500 five-star reviews from satisfied customers
+            Real reviews from homeowners and businesses across Gastonia, NC
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 items-stretch">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
@@ -87,16 +87,16 @@ export default function TestimonialsSection({ onLearnMoreClick }: TestimonialsSe
               }}
             >
               {/* Gradient Border */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-400 via-orange-500 to-blue-400 rounded-2xl opacity-0 group-hover:opacity-50 blur-sm transition-all duration-500" />
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 via-blue-500 to-amber-400 rounded-2xl opacity-0 group-hover:opacity-50 blur-sm transition-all duration-500" />
 
               {/* Card Content */}
-              <div className="relative rounded-2xl p-6 md:p-8 flex flex-col gap-4 bg-white border border-slate-200 group-hover:border-orange-200 transition-all duration-300 group-hover:shadow-xl h-full">
+              <div className="relative rounded-2xl p-6 md:p-8 flex flex-col gap-4 bg-white border border-slate-200 group-hover:border-blue-200 transition-all duration-300 group-hover:shadow-xl h-full">
                 {/* Stars with Animation */}
                 <div className="flex gap-1">
                   {Array.from({ length: testimonial.rating }).map((_, i) => (
                     <Star
                       key={i}
-                      className="w-5 h-5 fill-orange-400 text-orange-400 transition-all duration-300"
+                      className="w-5 h-5 fill-amber-400 text-amber-400 transition-all duration-300"
                       style={{
                         animation: `star-fill 0.5s ease-out ${i * 0.1}s both`,
                       }}
@@ -110,11 +110,11 @@ export default function TestimonialsSection({ onLearnMoreClick }: TestimonialsSe
                 </p>
 
                 {/* Author Info */}
-                <div className="border-t border-slate-100 pt-4">
-                  <h4 className="font-semibold text-slate-950 group-hover:text-orange-600 transition-colors duration-300">
+                <div className="border-t border-slate-100 pt-4 mt-auto">
+                  <h4 className="font-semibold text-slate-950 group-hover:text-blue-600 transition-colors duration-300">
                     {testimonial.name}
                   </h4>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-sm text-slate-600 font-medium">
                     {testimonial.role} • {testimonial.location}
                   </p>
                 </div>

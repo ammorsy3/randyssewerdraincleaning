@@ -69,23 +69,26 @@ export default function Header({ onCtaClick }: HeaderProps) {
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-500 ${isScrolled
-        ? 'py-2 bg-white/80 backdrop-blur-xl border-b border-orange-100 shadow-sm'
+        ? 'py-2 bg-white/80 backdrop-blur-xl border-b border-blue-100 shadow-sm'
         : 'py-4 bg-white border-b border-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <div
-          className="flex items-center gap-2 cursor-pointer group"
+          className="flex items-center gap-3 cursor-pointer group"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-slate-950 via-slate-900 to-orange-600 flex items-center justify-center text-white font-bold text-lg overflow-hidden group-hover:scale-110 transition-transform duration-300">
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rotate-45 transform translate-y-full group-hover:translate-y-[-200%] transition-transform duration-1000" />
-            JF
+          <div className="relative w-12 h-12 rounded-xl border border-slate-200 bg-white flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300 shadow-md">
+            <img
+              src="/randy-sewer-drain-cleaning-logo.jpeg"
+              alt="Randy's Sewer Drain Cleaning"
+              className="w-full h-full object-contain"
+            />
           </div>
           <div className="hidden sm:block">
-            <h1 className="text-xl font-bold text-slate-950 group-hover:text-orange-600 transition-colors">Jack The Fix</h1>
-            <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Emergency Plumber</p>
+            <h1 className="text-[17px] font-black text-slate-950 group-hover:text-blue-600 transition-colors tracking-tight leading-none">Randy's Sewer</h1>
+            <p className="text-[11px] text-blue-600 font-bold tracking-wide leading-tight mt-0.5">Drain Cleaning · Gastonia, NC</p>
           </div>
         </div>
 
@@ -97,13 +100,13 @@ export default function Header({ onCtaClick }: HeaderProps) {
               key={link.id}
               onClick={() => scrollToSection(link.id)}
               className={`relative py-2 text-sm font-semibold transition-all duration-300 ${activeSection === link.id
-                ? 'text-orange-600'
+                ? 'text-blue-600'
                 : 'text-slate-600 hover:text-slate-950'
                 }`}
             >
               {link.label}
               {/* Active Indicator */}
-              <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-500 ${activeSection === link.id ? 'w-full opacity-100' : 'w-0 opacity-0'
+              <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 transition-all duration-500 ${activeSection === link.id ? 'w-full opacity-100' : 'w-0 opacity-0'
                 }`} />
             </button>
           ))}
@@ -112,17 +115,17 @@ export default function Header({ onCtaClick }: HeaderProps) {
         {/* Phone and CTA - Desktop */}
         <div className="hidden md:flex items-center gap-6">
           <a
-            href="tel:+15550199"
+            href="tel:+17045799558"
             className="flex items-center gap-2 group"
           >
-            <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300">
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
               <Phone className="w-4 h-4" />
             </div>
-            <span className="font-bold text-slate-950 group-hover:text-orange-600 transition-colors">(555) 0199</span>
+            <span className="font-bold text-slate-950 group-hover:text-blue-600 transition-colors">(704) 579-9558</span>
           </a>
           <Button
             onClick={onCtaClick}
-            className="bg-slate-950 text-white hover:bg-orange-600 px-6 py-2 rounded-xl font-bold shadow-lg hover:shadow-orange-500/20 hover:scale-105 transition-all duration-300"
+            className="bg-slate-950 text-white hover:bg-blue-600 px-6 py-2 rounded-xl font-bold shadow-lg hover:shadow-blue-500/20 hover:scale-105 transition-all duration-300"
           >
             Book Now
           </Button>
@@ -130,7 +133,7 @@ export default function Header({ onCtaClick }: HeaderProps) {
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden flex items-center gap-4">
-          <a href="tel:+15550199" className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+          <a href="tel:+17045799558" className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
             <Phone className="w-5 h-5" />
           </a>
           <button
@@ -156,7 +159,7 @@ export default function Header({ onCtaClick }: HeaderProps) {
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
                 className={`text-left font-bold py-4 px-4 rounded-xl transition-all ${activeSection === link.id
-                  ? 'bg-orange-50 text-orange-600'
+                  ? 'bg-blue-50 text-blue-600'
                   : 'text-slate-600 hover:bg-slate-50'
                   }`}
               >
@@ -170,7 +173,7 @@ export default function Header({ onCtaClick }: HeaderProps) {
                   onCtaClick();
                   setIsMenuOpen(false);
                 }}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 rounded-xl shadow-lg"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg"
               >
                 Call Now
               </Button>

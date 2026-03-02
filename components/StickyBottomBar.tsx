@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Phone } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Phone, CalendarCheck } from 'lucide-react';
 
 interface StickyBottomBarProps {
   onCtaClick: () => void;
@@ -13,27 +12,38 @@ export default function StickyBottomBar({ onCtaClick }: StickyBottomBarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show sticky bar only on mobile (below 768px)
       const isMobile = window.innerWidth < 768;
-      const isNotAtTop = window.scrollY > 100;
+      const isNotAtTop = window.scrollY > 120;
       setIsVisible(isMobile && isNotAtTop);
     };
-
-    window.addEventListener('scroll', handleScroll);
+    // Run once on mount too
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 md:hidden bg-white border-t border-border shadow-2xl z-30 p-4 animate-in slide-in-from-bottom duration-300">
-      <Button
-        onClick={onCtaClick}
-        className="cta-button w-full py-3 rounded-lg font-semibold text-lg flex items-center justify-center gap-2"
-      >
-        <Phone className="w-5 h-5" />
-        Call Jack Now
-      </Button>
+    <div className="fixed bottom-0 left-0 right-0 md:hidden bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-2xl z-50 px-4 py-3 safe-b">
+      <div className="flex gap-3 max-w-sm mx-auto">
+        {/* Primary: Call */}
+        <a
+          href="tel:+17045799558"
+          className="flex-1 bg-blue-600 active:bg-blue-700 text-white font-black py-3.5 rounded-xl flex items-center justify-center gap-2 text-sm shadow-lg shadow-blue-500/30 active:scale-95 transition-transform"
+        >
+          <Phone className="w-4 h-4" />
+          Call Now
+        </a>
+        {/* Secondary: Book */}
+        <button
+          onClick={onCtaClick}
+          className="flex-1 bg-slate-950 active:bg-slate-800 text-white font-black py-3.5 rounded-xl flex items-center justify-center gap-2 text-sm active:scale-95 transition-transform"
+        >
+          <CalendarCheck className="w-4 h-4" />
+          Book Free
+        </button>
+      </div>
     </div>
   );
 }

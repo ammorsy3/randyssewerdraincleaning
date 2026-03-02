@@ -57,30 +57,30 @@ export default function DelayCalculator({ onCtaClick }: DelayCalculatorProps) {
     return (
         <section className="py-20 md:py-32 bg-slate-950 relative overflow-hidden">
             {/* Background Decorative Elements */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-600/10 rounded-full blur-[120px] -mr-64 -mt-64" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -mr-64 -mt-64" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -ml-64 -mb-64" />
 
             <div className="max-w-6xl mx-auto px-4 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-20 items-center">
+                <div className="grid lg:grid-cols-2 gap-10 md:gap-20 items-center">
 
                     {/* Left Side: Inputs */}
                     <div className="space-y-10 animate-reveal">
                         <div>
-                            <span className="text-orange-500 font-black tracking-[0.2em] uppercase text-xs mb-4 block">
+                            <span className="text-blue-500 font-black tracking-[0.2em] uppercase text-xs mb-4 block">
                                 Educational Tool
                             </span>
-                            <h2 className="text-5xl md:text-7xl font-black text-white mb-8 leading-[0.9]">
-                                Understanding <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600">
-                                    Your Leak
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 leading-[0.9]">
+                                The Cost of <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600">
+                                    Waiting
                                 </span>
                             </h2>
                             <p className="text-xl text-slate-400 leading-relaxed font-medium">
-                                We believe in transparency. Use this tool to understand what's happening with your plumbing—no pressure, just facts.
+                                A slow leak or ignored drain backup can cost you far more than a free estimate. See for yourself — no pressure, just facts.
                             </p>
                         </div>
 
-                        <div className="space-y-12 bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[2.5rem] shadow-2xl">
+                        <div className="space-y-8 md:space-y-12 bg-white/5 backdrop-blur-xl border border-white/10 p-7 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl">
                             {/* Slider 1 */}
                             <div className="space-y-6">
                                 <div className="flex justify-between items-center text-white">
@@ -90,7 +90,7 @@ export default function DelayCalculator({ onCtaClick }: DelayCalculatorProps) {
                                         </div>
                                         Leak Intensity
                                     </label>
-                                    <span className="text-3xl font-black text-orange-500 tabular-nums">{dripsPerMinute} <span className="text-sm uppercase tracking-widest text-slate-500">dpm</span></span>
+                                    <span className="text-3xl font-black text-blue-500 tabular-nums">{dripsPerMinute} <span className="text-sm uppercase tracking-widest text-slate-500">dpm</span></span>
                                 </div>
                                 <input
                                     type="range"
@@ -98,7 +98,7 @@ export default function DelayCalculator({ onCtaClick }: DelayCalculatorProps) {
                                     max="120"
                                     value={dripsPerMinute}
                                     onChange={(e) => setDripsPerMinute(parseInt(e.target.value))}
-                                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
                                 />
                             </div>
 
@@ -106,12 +106,12 @@ export default function DelayCalculator({ onCtaClick }: DelayCalculatorProps) {
                             <div className="space-y-6">
                                 <div className="flex justify-between items-center text-white">
                                     <label className="font-bold text-lg flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                                            <TrendingUp className="w-5 h-5 text-orange-400" />
+                                        <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                                            <TrendingUp className="w-5 h-5 text-blue-400" />
                                         </div>
                                         Duration of Delay
                                     </label>
-                                    <span className="text-3xl font-black text-orange-500 tabular-nums">{daysDelayed} <span className="text-sm uppercase tracking-widest text-slate-500">days</span></span>
+                                    <span className="text-3xl font-black text-blue-500 tabular-nums">{daysDelayed} <span className="text-sm uppercase tracking-widest text-slate-500">days</span></span>
                                 </div>
                                 <input
                                     type="range"
@@ -119,14 +119,14 @@ export default function DelayCalculator({ onCtaClick }: DelayCalculatorProps) {
                                     max="30"
                                     value={daysDelayed}
                                     onChange={(e) => setDaysDelayed(parseInt(e.target.value))}
-                                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                                    className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
                                 />
                             </div>
                         </div>
                     </div>
 
                     {/* Right Side: Results */}
-                    <div className="grid grid-cols-2 gap-6 animate-reveal delay-200">
+                    <div className="grid grid-cols-2 gap-4 md:gap-6 animate-reveal delay-200">
                         {/* Financial Loss */}
                         <div className="bg-white rounded-[2rem] p-8 shadow-2xl hover:scale-105 transition-all duration-500 group">
                             <div className="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center text-green-600 mb-6 group-hover:rotate-12 transition-transform">
@@ -169,7 +169,7 @@ export default function DelayCalculator({ onCtaClick }: DelayCalculatorProps) {
                             <div className="space-y-6">
                                 <div className="h-6 bg-slate-100 rounded-full overflow-hidden p-1 shadow-inner">
                                     <div
-                                        className="h-full bg-gradient-to-r from-orange-500 via-red-500 to-red-700 rounded-full transition-all duration-1000 flex items-center justify-end px-2"
+                                        className="h-full bg-gradient-to-r from-blue-500 via-red-500 to-red-700 rounded-full transition-all duration-1000 flex items-center justify-end px-2"
                                         style={{ width: `${moldRisk}%` }}
                                     >
                                         <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-glow" />
@@ -178,7 +178,7 @@ export default function DelayCalculator({ onCtaClick }: DelayCalculatorProps) {
 
                                 <div className="grid grid-cols-3 gap-4">
                                     {[
-                                        { icon: Home, label: 'Mold Risk', color: 'text-orange-600' },
+                                        { icon: Home, label: 'Mold Risk', color: 'text-blue-600' },
                                         { icon: ShieldX, label: 'Drywall Decay', color: 'text-red-600' },
                                         { icon: AlertTriangle, label: 'Flooding', color: 'text-red-800' },
                                     ].map((risk, i) => (
@@ -193,7 +193,7 @@ export default function DelayCalculator({ onCtaClick }: DelayCalculatorProps) {
 
                         <Button
                             onClick={onCtaClick}
-                            className="col-span-2 bg-orange-600 hover:bg-orange-700 text-white font-black h-20 rounded-[2rem] text-2xl shadow-2xl hover:shadow-orange-500/40 hover:scale-105 transition-all mt-6"
+                            className="col-span-2 bg-blue-600 hover:bg-blue-700 text-white font-black h-20 rounded-[2rem] text-2xl shadow-2xl hover:shadow-blue-500/40 hover:scale-105 transition-all mt-6"
                         >
                             Get Expert Help
                         </Button>

@@ -6,7 +6,6 @@ import HeroSection from '@/components/HeroSection';
 import QuickStats from '@/components/QuickStats';
 import ServicesSection from '@/components/ServicesSection';
 import TrustBadges from '@/components/TrustBadges';
-import PromoCard from '@/components/PromoCard';
 import ServiceAreasSection from '@/components/ServiceAreasSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import FAQSection from '@/components/FAQSection';
@@ -45,7 +44,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen pb-20 md:pb-0">
       <HeaderTopBar />
       <Header onCtaClick={handleCtaClick} />
 
@@ -57,7 +56,6 @@ export default function Home() {
         <DelayCalculator onCtaClick={handleCtaClick} />
         <ArchitectureOfFlow />
         <TrustBadges />
-        <PromoCard onCtaClick={handleCtaClick} />
         <ServiceAreasSection />
         <TrueProofSlider />
         <TestimonialsSection onLearnMoreClick={handleLearnMoreClick} />

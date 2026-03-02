@@ -9,20 +9,20 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Emergency Plumber Services - Jack The Fix | 24/7 Available',
-  description: 'Professional emergency plumbing services. Licensed, bonded, insured. 2-hour response time. Call now for fast repairs.',
-  keywords: 'emergency plumber, plumbing services, leak repair, 24/7 service, pipe repair',
+  title: "Randy's Sewer Drain Cleaning | Gastonia, NC — Free Estimates",
+  description: 'Top quality sewer line cleaning, water jetting, and plumbing repairs in Gastonia, NC. Free estimates. 25% off for seniors & veterans. Call (704) 579-9558.',
+  keywords: 'sewer drain cleaning, Gastonia NC, drain clog, water jetting, sewer line cleaning, plumber Gastonia, Randy sewer drain',
   generator: 'v0.app',
   openGraph: {
-    title: 'Emergency Plumber Services - Jack The Fix | 24/7 Available',
-    description: 'Professional emergency plumbing services. Licensed, bonded, insured. 2-hour response time.',
+    title: "Randy's Sewer Drain Cleaning | Gastonia, NC",
+    description: 'Residential & commercial sewer and drain services in Gastonia, NC. Free estimates. Senior & veteran discounts.',
     type: 'website',
-    url: 'https://jackthefix.local',
-    siteName: 'Jack The Fix',
+    url: 'https://randyssewerdraincleaning.com',
+    siteName: "Randy's Sewer Drain Cleaning",
   },
   icons: {
-    icon: '/icon.png',
-    apple: '/apple-icon.png',
+    icon: '/randy-sewer-drain-cleaning-logo.jpeg',
+    apple: '/randy-sewer-drain-cleaning-logo.jpeg',
   },
 }
 

@@ -12,7 +12,7 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
   const [text, setText] = useState('');
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const words = ['Leak', 'Drip', 'Waste', 'Flood'];
+  const words = ['Clog', 'Backup', 'Drain', 'Block'];
   const [speed, setSpeed] = useState(150);
 
   useEffect(() => {
@@ -45,92 +45,87 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
   }, [text, isDeleting, wordIndex, speed]);
 
   return (
-    <section className="relative min-h-[600px] md:min-h-screen overflow-hidden flex items-center">
+    <section className="relative min-h-[100dvh] md:min-h-screen overflow-hidden flex items-center">
       {/* ... Dynamic Animated Background Layers ... */}
       <div className="absolute inset-0 z-0">
         {/* Deep Slate Base */}
         <div className="absolute inset-0 bg-[#020617]" />
 
-        {/* Animated Gradient Mesh */}
-        <div className="absolute inset-0 bg-[linear-gradient(-45deg,#020617_0%,#0f172a_35%,#1e293b_50%,#0f172a_65%,#020617_100%)] animate-gradient-shift opacity-70" />
+        {/* Static, Performant Radial Gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-[#020617] to-[#020617]" />
 
-        {/* Glowing Orbs */}
-        <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-orange-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
-        </div>
-
-        {/* Animated Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px] animate-mesh-pulse" />
-
-        {/* Floating Water "Droplets" */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/4 right-[15%] w-32 h-32 bg-blue-400/10 rounded-full blur-2xl animate-float" />
-          <div className="absolute bottom-1/3 left-[10%] w-48 h-48 bg-orange-400/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
-        </div>
+        {/* Static Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 py-12 md:py-24 grid md:grid-cols-2 gap-8 md:gap-12 items-center z-10">
+      <div className="relative max-w-7xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 md:gap-12 items-center z-10 w-full">
         {/* Left Content */}
         <div className="space-y-6 md:space-y-8 flex flex-col justify-center">
           <div className="space-y-4 animate-reveal">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-none tracking-tight">
-              Stop the <span className="inline-block relative text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 min-w-[3ch]">
+            <h1 className="text-[2.6rem] sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-none tracking-tight">
+              Stop the <span className="inline-block relative text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 min-w-[3ch]">
                 {text}
-                <span className="absolute right-[-4px] top-0 bottom-0 w-[4px] bg-orange-500 animate-pulse" />
+                <span className="absolute right-[-4px] top-0 bottom-0 w-[4px] bg-blue-500 animate-pulse" />
               </span>
             </h1>
-            <div className="h-1.5 w-24 bg-orange-500 rounded-full" />
+            <div className="h-1.5 w-24 bg-blue-500 rounded-full" />
             <h2 className="text-xl md:text-2xl text-slate-300 font-medium tracking-wide">
-              Fast. Professional. 24/7 Reliability.
+              Sewer & Drain Experts. Gastonia, NC.
             </h2>
           </div>
 
           <p className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-lg text-balance animate-reveal delay-100">
-            Emergency plumbing services available 24/7. Licensed, bonded, and insured. We'll be there in <span className="text-white font-semibold">2 hours or less</span>.
+            Residential & commercial sewer line cleaning, hydro jetting, and all plumbing repairs. <span className="text-white font-semibold">Free estimates</span> — we won't stop until you're satisfied.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-reveal delay-200">
+          <div className="flex flex-col sm:flex-row gap-3 pt-4 animate-reveal delay-200">
+            <a
+              href="tel:+17045799558"
+              className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 text-lg rounded-xl font-black w-full sm:w-auto shadow-[0_0_20px_rgba(37,99,235,0.35)] hover:shadow-[0_0_32px_rgba(37,99,235,0.55)] transition-all duration-300 active:scale-95"
+            >
+              📞 24/7 Emergency Service
+            </a>
             <Button
               onClick={onCtaClick}
-              className="cta-button px-8 py-6 text-xl rounded-xl font-bold w-full sm:w-auto shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] transition-all duration-300"
-            >
-              Call Jack Now
-            </Button>
-            <Button
               variant="outline"
-              className="px-8 py-3 text-lg rounded-lg font-semibold border-white text-white hover:bg-white/10 w-full sm:w-auto bg-transparent border-slate-700 hover:bg-white/10"
+              className="px-6 py-4 text-base rounded-xl font-semibold border-slate-700 text-white hover:bg-white/10 w-full sm:w-auto bg-transparent transition-all duration-300 active:scale-95"
             >
-              View Services
+              Book Free Estimate
             </Button>
           </div>
 
           {/* Trust Indicators */}
           <div className="flex flex-wrap gap-6 pt-6 animate-reveal delay-300">
             <div className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center border border-orange-500/20 group-hover:border-orange-500/40 transition-colors">
-                <span className="text-orange-500 font-bold">✓</span>
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:border-blue-500/40 transition-colors">
+                <span className="text-blue-500 font-bold">✓</span>
               </div>
-              <span className="text-sm font-medium text-slate-300">Licensed & Insured</span>
+              <span className="text-sm font-medium text-slate-300">Free Estimates</span>
             </div>
             <div className="flex items-center gap-3 group">
               <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:border-blue-500/40 transition-colors">
                 <span className="text-blue-400 font-bold">✓</span>
               </div>
-              <span className="text-sm font-medium text-slate-300">2-Hour Response</span>
+              <span className="text-sm font-medium text-slate-300">25% Senior & Veteran Discount</span>
+            </div>
+            <div className="flex items-center gap-3 group">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:border-blue-500/40 transition-colors">
+                <span className="text-blue-500 font-bold">✓</span>
+              </div>
+              <span className="text-sm font-medium text-slate-300">Residential & Commercial</span>
             </div>
           </div>
         </div>
 
-        {/* Right Image Container */}
-        <div className="relative group animate-reveal delay-200">
-          <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+        {/* Right Image Container — hidden on mobile to keep hero clean */}
+        <div className="hidden md:block relative group animate-reveal delay-200">
+          <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-slate-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
           <div className="relative h-[400px] md:h-[600px] rounded-2xl overflow-hidden glass-card">
             <Image
-              src="/hero-plumber.png"
-              alt="Professional plumber in a modern kitchen"
+              src="/hero-plumber-action.png"
+              alt="Randy's Sewer Drain Cleaning — Professional plumber using drain cleaning machine"
               fill
-              className="object-cover group-hover:scale-110 transition-transform duration-1000"
+              className="object-cover object-center group-hover:scale-110 transition-transform duration-1000"
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-60" />
@@ -139,13 +134,15 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
             <div className="absolute bottom-6 left-6 right-6 p-4 glass-card rounded-xl animate-float">
               <div className="flex items-center gap-4">
                 <div className="flex -space-x-3">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-800" />
+                  {['/avatar-1.png', '/avatar-2.png', '/avatar-3.png'].map((src, i) => (
+                    <div key={i} className="relative w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-800 overflow-hidden">
+                      <Image src={src} alt="Gastonia resident" fill className="object-cover" />
+                    </div>
                   ))}
                 </div>
                 <div>
-                  <p className="text-white font-bold text-sm">500+ Happy Clients</p>
-                  <p className="text-slate-400 text-xs text-nowrap">Local experts in your area</p>
+                  <p className="text-white font-bold text-sm">Serving Gastonia Since Day One</p>
+                  <p className="text-slate-400 text-xs text-nowrap">Local sewer & drain experts</p>
                 </div>
               </div>
             </div>
@@ -156,7 +153,7 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity">
         <p className="text-slate-400 text-xs uppercase tracking-widest font-bold">Explore</p>
-        <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7" />
         </svg>
       </div>

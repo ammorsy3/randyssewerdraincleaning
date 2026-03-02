@@ -69,20 +69,20 @@ export default function LeadMagnetModal({ isOpen, onClose }: LeadMagnetModalProp
                         </div>
 
                         <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 leading-tight">
-                            The "No-Panic" <br />
-                            <span className="text-orange-600">Plumbing Guide</span>
+                            The Homeowner's <br />
+                            <span className="text-orange-600">Drain & Sewer Guide</span>
                         </h2>
 
                         <p className="text-base text-slate-600 mb-8 leading-relaxed font-medium">
-                            Learn what to do in the first 5 minutes of a leak to avoid thousands in damage.
+                            Learn how to spot early warning signs and what to do before calling a pro — from the experts at Randy's.
                         </p>
 
                         <div className="space-y-3">
                             {[
-                                "Emergency shutoff guide",
-                                "Invisible leak signs",
-                                "Maintenance schedule",
-                                "Winter-proofing guide"
+                                "Warning signs of a main line clog",
+                                "When to call vs. DIY",
+                                "How hydro jetting works",
+                                "Senior & veteran discount info"
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-3">
                                     <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center text-green-600">
@@ -136,7 +136,7 @@ export default function LeadMagnetModal({ isOpen, onClose }: LeadMagnetModalProp
                                     </Button>
                                 </form>
                                 <p className="text-[9px] text-slate-500 text-center mt-6 uppercase tracking-widest font-bold">
-                                    Trusted by 500+ Local Homeowners
+                                    From Randy's Sewer Drain Cleaning — Gastonia, NC
                                 </p>
                             </div>
                         ) : (

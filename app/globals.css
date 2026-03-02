@@ -5,12 +5,20 @@
 
 :root {
   /* Brand Colors */
-  --primary: #0f172a;
-  --accent: #ea580c;
-  --background: #f8f7f4;
-  --text-primary: #1a1a1a;
-  --text-secondary: #6b7280;
-  --border: #e5e7eb;
+  --primary: #020617;
+  /* Slate 950 */
+  --accent: #2563eb;
+  /* Blue 600 */
+  --accent-gold: #f59e0b;
+  /* Amber 500 */
+  --background: #f8fafc;
+  /* Slate 50 */
+  --text-primary: #0f172a;
+  /* Slate 900 */
+  --text-secondary: #475569;
+  /* Slate 600 */
+  --border: #e2e8f0;
+  /* Slate 200 */
 
   /* Glassmorphism */
   --glass-bg: rgba(248, 247, 244, 0.7);
@@ -121,6 +129,24 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  @keyframes marquee {
+  from {
+    transform: translateX(0);
+    }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+    }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
 }
 
 @layer base {
@@ -148,13 +174,13 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #ea580c, #9a3412);
+  background: linear-gradient(to bottom, var(--accent), var(--primary));
   border-radius: 5px;
   border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c2410c;
+  background: var(--accent);
 }
 
 /* Glassmorphism Effect */
@@ -176,8 +202,9 @@
 }
 
 .cta-button:hover {
-  background-color: #d4480a;
-  box-shadow: 0 10px 25px rgba(234, 88, 12, 0.3);
+  background-color: #1e40af;
+  /* Blue 800 */
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
   transform: translateY(-2px);
 }
 

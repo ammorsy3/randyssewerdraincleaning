@@ -10,28 +10,28 @@ interface LearnMoreModalProps {
 
 const reasons = [
   {
-    title: 'Expert Diagnosis',
-    description: 'Our licensed plumbers identify the root cause of your problem, not just symptoms.'
+    title: 'Sewer Line Specialists',
+    description: 'Randy\'s specializes in all residential and commercial sewer line cleaning and hydro jetting services.'
   },
   {
-    title: 'Fast Resolution',
-    description: 'Most issues resolved in a single visit. We come prepared with the right tools and parts.'
+    title: 'Free Estimates',
+    description: 'Don\'t hesitate to reach out — we offer free estimates on all services with no obligation.'
   },
   {
-    title: 'Transparent Pricing',
-    description: 'No hidden fees. We provide upfront quotes before starting any work. $89 dispatch fee applies.'
+    title: 'Competitive Rates',
+    description: 'Fair, transparent pricing. Plus 25% off for seniors and veterans — just mention it when you call.'
   },
   {
-    title: 'Guaranteed Work',
-    description: 'All repairs are backed by our satisfaction guarantee. Your peace of mind is our priority.'
+    title: 'Satisfaction Guaranteed',
+    description: 'We don\'t finish the job until you\'re fully satisfied. Your needs always come first.'
   },
   {
-    title: '24/7 Availability',
-    description: 'We\'re here when you need us. Day, night, weekends, or holidays - no emergency is too big.'
+    title: 'Mon–Fri Availability',
+    description: 'We\'re available Monday through Friday, 9AM–5PM. Book online or call anytime to schedule.'
   },
   {
-    title: 'Licensed & Insured',
-    description: 'Full credentials and insurance protection. Work with confidence knowing you\'re in safe hands.'
+    title: 'Residential & Commercial',
+    description: 'From a single clogged drain to full commercial sewer line service — we handle it all.'
   }
 ];
 
@@ -44,7 +44,7 @@ export default function LearnMoreModal({ isOpen, onClose }: LearnMoreModalProps)
         {/* Header */}
         <div className="sticky top-0 bg-gradient-to-r from-slate-950 to-slate-900 text-white p-6 flex items-center justify-between border-b border-orange-600/30">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold">Why Book a Call With Jack?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">Why Choose Randy's?</h2>
             <p className="text-gray-300 text-sm mt-1">Discover what makes us the trusted choice</p>
           </div>
           <button
@@ -85,7 +85,7 @@ export default function LearnMoreModal({ isOpen, onClose }: LearnMoreModalProps)
               onClick={onClose}
               className="cta-button w-full py-3 text-lg rounded-lg font-semibold"
             >
-              Call Jack Now
+              Get a Free Estimate
             </Button>
             <button
               onClick={onClose}

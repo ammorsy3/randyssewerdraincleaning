@@ -156,17 +156,14 @@ export default function CTAModal({ isOpen, onClose }: CTAModalProps) {
                       <SelectValue placeholder="Select a service" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="leak-repair">Emergency Leak Repair</SelectItem>
-                      <SelectItem value="pipe-maintenance">
-                        Pipe Installation & Maintenance
-                      </SelectItem>
-                      <SelectItem value="drain-cleaning">
-                        Drain Cleaning & Clearing
-                      </SelectItem>
-                      <SelectItem value="water-heater">
-                        Water Heater Services
-                      </SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="sewer-cleaning">Sewer Line Cleaning</SelectItem>
+                      <SelectItem value="hydro-jetting">Hydro Jetting</SelectItem>
+                      <SelectItem value="sewer-camera">Sewer Line Camera</SelectItem>
+                      <SelectItem value="drain-clog">Drain Clog & Repair</SelectItem>
+                      <SelectItem value="toilet">Toilet Repair / Install</SelectItem>
+                      <SelectItem value="faucet">Faucet Repair / Install</SelectItem>
+                      <SelectItem value="water-heater">Water Heater Repair / Install</SelectItem>
+                      <SelectItem value="other">Other Plumbing Repair</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -196,7 +193,7 @@ export default function CTAModal({ isOpen, onClose }: CTAModalProps) {
                 </Button>
 
                 <p className="text-xs text-text-secondary text-center">
-                  We'll contact you within 2 hours during business hours.
+                  We respond as soon as possible — Mon–Fri, 9AM–5PM. Free estimates always.
                 </p>
               </form>
             )}
