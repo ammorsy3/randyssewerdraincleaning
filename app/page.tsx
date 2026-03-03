@@ -16,7 +16,7 @@ import CTAModal from '@/components/CTAModal';
 import LearnMoreModal from '@/components/LearnMoreModal';
 import BackToTop from '@/components/BackToTop';
 import DiagnosticWizard from '@/components/DiagnosticWizard';
-import DelayCalculator from '@/components/DelayCalculator';
+
 import TrueProofSlider from '@/components/TrueProofSlider';
 import ArchitectureOfFlow from '@/components/ArchitectureOfFlow';
 import HeaderTopBar from '@/components/HeaderTopBar';
@@ -53,7 +53,7 @@ export default function Home() {
         <DiagnosticWizard onCtaClick={handleCtaClick} />
         <QuickStats />
         <ServicesSection onCtaClick={handleCtaClick} />
-        <DelayCalculator onCtaClick={handleCtaClick} />
+
         <ArchitectureOfFlow />
         <TrustBadges />
         <ServiceAreasSection />

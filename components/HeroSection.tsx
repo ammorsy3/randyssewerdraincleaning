@@ -117,10 +117,10 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* Right Image Container — hidden on mobile to keep hero clean */}
-        <div className="hidden md:block relative group animate-reveal delay-200">
+        {/* Right Image Container */}
+        <div className="relative group animate-reveal delay-200 mt-8 md:mt-0">
           <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-slate-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-          <div className="relative h-[400px] md:h-[600px] rounded-2xl overflow-hidden glass-card">
+          <div className="relative h-[300px] sm:h-[400px] md:h-[600px] rounded-2xl overflow-hidden glass-card">
             <Image
               src="/hero-plumber-action.png"
               alt="Randy's Sewer Drain Cleaning — Professional plumber using drain cleaning machine"
