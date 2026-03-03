@@ -14,7 +14,7 @@ import Footer from '@/components/Footer';
 import StickyBottomBar from '@/components/StickyBottomBar';
 import CTAModal from '@/components/CTAModal';
 import LearnMoreModal from '@/components/LearnMoreModal';
-import BackToTop from '@/components/BackToTop';
+
 import DiagnosticWizard from '@/components/DiagnosticWizard';
 
 import TrueProofSlider from '@/components/TrueProofSlider';
@@ -65,7 +65,7 @@ export default function Home() {
 
       <Footer onCtaClick={handleCtaClick} />
       <StickyBottomBar onCtaClick={handleCtaClick} />
-      <BackToTop />
+
 
       <CTAModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <LeadMagnetModal isOpen={isLeadMagnetOpen} onClose={() => setIsLeadMagnetOpen(false)} />
